@@ -1,5 +1,5 @@
-// ---------- TODO: replace with your real products, or connect Firebase later ----------
-const PRODUCTS = [
+// ---------- Sample/fallback products, shown until Firestore data loads ----------
+let PRODUCTS = [
   {
     id: "1",
     name: "Handwoven Silk Saree",
@@ -130,6 +130,22 @@ function renderProductGrid(containerId, category) {
 
   observeFadeIns();
 }
+
+// ---------- Re-render every product grid currently on the page ----------
+// Any container with [data-product-grid] gets re-rendered using its
+// data-category (or all products, if no category is set). Called once when
+// the page first loads, and again whenever Firebase pushes new product data.
+function renderAllGrids() {
+  document.querySelectorAll("[data-product-grid]").forEach((el) => {
+    renderProductGrid(el.id, el.dataset.category || null);
+  });
+}
+
+// ---------- Called by firebase-sync.js when live product data arrives ----------
+window.setProducts = function (products) {
+  PRODUCTS = products;
+  renderAllGrids();
+};
 
 // ---------- Cart page rendering ----------
 function renderCartPage() {

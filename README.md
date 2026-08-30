@@ -7,8 +7,27 @@ no build step. Upload these exactly the way you uploaded Notun Bazaar's files.
 - `index.html` — homepage (hero, categories, bestsellers, craftsmanship story, gifting, reviews)
 - `sarees.html`, `womens-clothing.html`, `handicrafts.html`, `gifting.html` — category pages
 - `about.html`, `contact.html`, `cart.html`
+- `admin.html` + `admin.js` — password-protected page to add/edit/delete products with image upload
+- `firebase-init.js` — shared Firebase setup (your project's config)
+- `firebase-sync.js` — streams live product data from Firestore into the public pages
 - `styles.css` — all colors, type, layout, animations
-- `script.js` — cart (saved in the browser via localStorage), product data, scroll animations
+- `script.js` — cart (saved in the browser via localStorage), fallback sample products, scroll animations
+- `FIREBASE_RULES.md` — security rules to paste into Firebase Console once admin is confirmed working
+
+## How the admin page works
+1. Go to `yoursite.vercel.app/admin.html` and log in with the email/password
+   you created in Firebase Authentication.
+2. Add a product: name, price, category, and an image file. It uploads the
+   image to Firebase Storage and saves the product to Firestore.
+3. Your live site (homepage + category pages) picks up the new product
+   automatically within a second or two — no redeploy needed, since it's
+   reading live from Firestore.
+4. Edit or delete any product from the same table.
+
+**Important:** `admin.html` is a real page anyone could technically navigate
+to, but they can't do anything without your login — the "Add/Edit/Delete"
+actions are blocked by Firebase until you've applied the rules in
+`FIREBASE_RULES.md`. Do that as soon as the admin page is confirmed working.
 
 ## Upload to GitHub (same process as Notun Bazaar)
 1. Create a new repository on github.com (Public, no README)
@@ -35,4 +54,4 @@ same way — Vercel redeploys automatically.
 ## What's not wired up yet
 - **Checkout payment** — the cart totals correctly but "Proceed to Checkout" just shows a placeholder alert. Wiring up Razorpay/Stripe is the natural next step once you're ready to accept real payments.
 - **Contact form delivery** — the form shows a success message but doesn't actually send anywhere yet. A service like Formspree can connect it to your email with minimal setup.
-- **Product data persistence** — products live directly in `script.js` for now. If you want to update stock/prices without editing code each time, that's what the Firebase step in our earlier plan was for.
+- **Firestore/Storage security rules** — see `FIREBASE_RULES.md`. Test mode works for now but expires after 30 days.

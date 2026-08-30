@@ -93,7 +93,7 @@
       <h2 class="section-heading">Bestsellers</h2>
       <p class="section-sub">The pieces our customers keep coming back for.</p>
     </div>
-    <div class="product-grid" id="featured-products" style="margin-top:40px;"></div>
+    <div class="product-grid" id="featured-products" data-product-grid style="margin-top:40px;"></div>
   </section>
 
   <!-- Craftsmanship story (signature animated moment) -->
@@ -179,6 +179,7 @@
 </footer>
 
 <script src="script.js"></script>
+<script type="module" src="firebase-sync.js"></script>
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
   renderProductGrid("featured-products");

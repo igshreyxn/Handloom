@@ -47,7 +47,7 @@
     <h1 class="section-heading">Sarees</h1>
     <p class="section-sub"><!-- TODO: replace with real category copy -->Handwoven and hand-printed sarees, sourced directly from artisans.</p>
   </div>
-  <div class="product-grid" id="category-products" style="margin-top:40px;"></div>
+  <div class="product-grid" id="category-products" data-product-grid data-category="sarees" style="margin-top:40px;"></div>
 </main>
 
 <footer>
@@ -77,6 +77,7 @@
 </footer>
 
 <script src="script.js"></script>
+<script type="module" src="firebase-sync.js"></script>
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
   renderProductGrid("category-products", "sarees");
