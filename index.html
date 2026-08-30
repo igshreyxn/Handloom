@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your Brand Name | Handwoven Sarees & Handicrafts</title>
+<meta name="description" content="Handwoven sarees, women's clothing, and handcrafted pieces sourced directly from artisans, with easy exchanges and WhatsApp support." />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header id="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand heading">Your Brand Name</a>
+    <!-- TODO: replace "Your Brand Name" above and in styles/footer -->
+
+    <nav class="main-nav">
+      <a href="sarees.html">Sarees</a>
+      <a href="womens-clothing.html">Women's Clothing</a>
+      <a href="handicrafts.html">Handicrafts</a>
+      <a href="gifting.html">Gifting</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="header-icons">
+      <!-- TODO: replace 911234567890 with your real WhatsApp number, country code, no + or spaces -->
+      <a class="icon-btn whatsapp" href="https://wa.me/911234567890?text=Hi!%20I'd%20like%20to%20know%20more%20about%20your%20sarees." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2Zm5.8 14.14c-.24.68-1.4 1.3-1.93 1.38-.49.08-1.1.11-1.78-.11-.41-.13-.94-.3-1.62-.6-2.85-1.23-4.71-4.09-4.85-4.28-.14-.19-1.16-1.54-1.16-2.94s.73-2.09.99-2.37c.26-.29.56-.36.75-.36h.54c.17 0 .4-.06.63.48.24.56.79 1.94.86 2.08.07.14.11.3.02.49-.09.19-.14.3-.28.46-.14.16-.29.36-.42.48-.14.14-.28.29-.12.57.16.28.7 1.15 1.5 1.86 1.03.92 1.9 1.2 2.18 1.34.28.14.44.11.6-.07.16-.18.68-.79.87-1.06.19-.27.37-.22.62-.13.26.09 1.63.77 1.91.91.28.14.46.21.53.33.07.12.07.68-.17 1.36Z"/></svg>
+      </a>
+
+      <a class="icon-btn" href="cart.html" aria-label="Cart" style="position:relative;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 1.876-4.865 2.182-7.5H5.106M7.5 14.25L5.106 6.75M7.5 14.25l-1.06 3.53a1 1 0 00.964 1.22h9.29m-9.29 0h9.29"/></svg>
+        <span id="cart-badge" class="cart-badge" style="display:none;">0</span>
+      </a>
+
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="24" height="24"><path stroke-linecap="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="sarees.html">Sarees</a>
+    <a href="womens-clothing.html">Women's Clothing</a>
+    <a href="handicrafts.html">Handicrafts</a>
+    <a href="gifting.html">Gifting</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero">
+    <!-- TODO: replace with a real lifestyle photo of your products -->
+    <img src="https://images.unsplash.com/photo-1610030181087-540967a0aa46?q=80&w=1600" alt="Handwoven saree" />
+    <div class="hero-content">
+      <h1>Handwoven Sarees &amp; Handicrafts,<br>Made by Hand, Chosen with Care</h1>
+      <p>Sarees, women's wear, and handcrafted pieces sourced directly from artisans — for the woman who wears them, and the person choosing something meaningful for her.</p>
+      <div class="hero-actions">
+        <a href="sarees.html" class="btn btn-gold">Shop Now</a>
+        <a class="btn btn-whatsapp" href="https://wa.me/911234567890" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category tiles -->
+  <section class="page-section container">
+    <div class="tile-grid">
+      <a href="sarees.html" class="tile fade-in" style="transition-delay:0ms">
+        <div class="tile-image"><img src="https://images.unsplash.com/photo-1610030181087-540967a0aa46?q=80&w=800" alt="Sarees" /></div>
+        <span class="tile-label">Sarees</span>
+      </a>
+      <a href="womens-clothing.html" class="tile fade-in" style="transition-delay:80ms">
+        <div class="tile-image"><img src="https://images.unsplash.com/photo-1594736797933-d0f06ba2c064?q=80&w=800" alt="Women's Clothing" /></div>
+        <span class="tile-label">Women's Clothing</span>
+      </a>
+      <a href="handicrafts.html" class="tile fade-in" style="transition-delay:160ms">
+        <div class="tile-image"><img src="https://images.unsplash.com/photo-1604423043492-01ce8f61b2ca?q=80&w=800" alt="Handicrafts" /></div>
+        <span class="tile-label">Handicrafts</span>
+      </a>
+      <a href="gifting.html" class="tile fade-in" style="transition-delay:240ms">
+        <div class="tile-image"><img src="https://images.unsplash.com/photo-1610030181261-8a7e6d5a7e6b?q=80&w=800" alt="Gifting" /></div>
+        <span class="tile-label">Gifting</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Featured products -->
+  <section class="page-section container">
+    <div class="fade-in">
+      <h2 class="section-heading">Bestsellers</h2>
+      <p class="section-sub">The pieces our customers keep coming back for.</p>
+    </div>
+    <div class="product-grid" id="featured-products" style="margin-top:40px;"></div>
+  </section>
+
+  <!-- Craftsmanship story (signature animated moment) -->
+  <section class="story-section" id="story-section">
+    <div class="container story-grid">
+      <div class="story-image">
+        <!-- TODO: replace with a real photo of the making process/artisan at work -->
+        <img src="https://images.unsplash.com/photo-1594736797933-d0f06ba2c064?q=80&w=1000" alt="Artisan at work" />
+      </div>
+      <p class="story-text">
+        Made by hand, thread by thread.
+        <span class="story-sub"><!-- TODO: replace with a real paragraph about your artisans, materials, or process -->
+        Every piece begins with a person, not a machine — a weaver, a printer, a craftsperson working with techniques passed down through generations.</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- Gifting callout -->
+  <section class="page-section container">
+    <div class="fade-in gift-box">
+      <div>
+        <h2 class="section-heading">Buying for Someone Special?</h2>
+        <p class="section-sub" style="max-width:420px;">Shopping for yourself or picking a gift — either way, you'll find pieces that feel considered, not generic.</p>
+        <!-- TODO: mention gift wrapping / a note card option here if you offer one -->
+        <a href="gifting.html" class="btn btn-secondary" style="margin-top:24px;">Explore Gifting</a>
+      </div>
+      <div class="gift-image">
+        <!-- TODO: replace with a real gifting-themed photo -->
+        <img src="https://images.unsplash.com/photo-1604423043492-01ce8f61b2ca?q=80&w=1000" alt="Gift-wrapped handicraft" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="page-section container">
+    <div class="fade-in">
+      <h2 class="section-heading">What Our Customers Say</h2>
+    </div>
+    <div class="review-grid" style="margin-top:40px;">
+      <!-- TODO: replace all three with real customer testimonials as soon as you have them -->
+      <div class="review-card fade-in" style="transition-delay:0ms">
+        <p class="review-quote">"Placeholder: quote from a real customer about fabric quality, fit, or the buying experience."</p>
+        <div class="review-name">— Customer Name, City</div>
+      </div>
+      <div class="review-card fade-in" style="transition-delay:100ms">
+        <p class="review-quote">"Placeholder: another real quote — keep it short, in the customer's own words."</p>
+        <div class="review-name">— Customer Name, City</div>
+      </div>
+      <div class="review-card fade-in" style="transition-delay:200ms">
+        <p class="review-quote">"Placeholder: a third quote, ideally about the WhatsApp buying experience."</p>
+        <div class="review-name">— Customer Name, City</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <h3 class="heading">Your Brand Name</h3>
+      <p style="margin-top:12px; max-width:280px;">Handwoven sarees, women's clothing, and handcrafted pieces — made by artisans, chosen with care.</p>
+    </div>
+    <div>
+      <h4 class="heading">Contact</h4>
+      <ul>
+        <!-- TODO: replace with your real phone, email, WhatsApp number -->
+        <li>Phone: +91 12345 67890</li>
+        <li>Email: hello@yourbrand.com</li>
+        <li>WhatsApp: +91 12345 67890</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="heading">Policies</h4>
+      <ul>
+        <li>5-Day Easy Exchange &amp; Refund</li>
+        <li>Delivery in 7 Days across India</li>
+        <li><a href="contact.html">Get in touch</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© <span id="year"></span> Your Brand Name. All rights reserved.</div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+  renderProductGrid("featured-products");
+</script>
+</body>
+</html>

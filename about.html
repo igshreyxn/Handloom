@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About | Your Brand Name</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header id="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand heading">Your Brand Name</a>
+    <nav class="main-nav">
+      <a href="sarees.html">Sarees</a>
+      <a href="womens-clothing.html">Women's Clothing</a>
+      <a href="handicrafts.html">Handicrafts</a>
+      <a href="gifting.html">Gifting</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-icons">
+      <a class="icon-btn whatsapp" href="https://wa.me/911234567890" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.29-1.39a9.9 9.9 0 0 0 4.75 1.21h.01c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2Zm5.8 14.14c-.24.68-1.4 1.3-1.93 1.38-.49.08-1.1.11-1.78-.11-.41-.13-.94-.3-1.62-.6-2.85-1.23-4.71-4.09-4.85-4.28-.14-.19-1.16-1.54-1.16-2.94s.73-2.09.99-2.37c.26-.29.56-.36.75-.36h.54c.17 0 .4-.06.63.48.24.56.79 1.94.86 2.08.07.14.11.3.02.49-.09.19-.14.3-.28.46-.14.16-.29.36-.42.48-.14.14-.28.29-.12.57.16.28.7 1.15 1.5 1.86 1.03.92 1.9 1.2 2.18 1.34.28.14.44.11.6-.07.16-.18.68-.79.87-1.06.19-.27.37-.22.62-.13.26.09 1.63.77 1.91.91.28.14.46.21.53.33.07.12.07.68-.17 1.36Z"/></svg>
+      </a>
+      <a class="icon-btn" href="cart.html" aria-label="Cart" style="position:relative;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 1.876-4.865 2.182-7.5H5.106M7.5 14.25L5.106 6.75M7.5 14.25l-1.06 3.53a1 1 0 00.964 1.22h9.29m-9.29 0h9.29"/></svg>
+        <span id="cart-badge" class="cart-badge" style="display:none;">0</span>
+      </a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" width="24" height="24"><path stroke-linecap="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobile-nav">
+    <a href="sarees.html">Sarees</a>
+    <a href="womens-clothing.html">Women's Clothing</a>
+    <a href="handicrafts.html">Handicrafts</a>
+    <a href="gifting.html">Gifting</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<main class="container page-section" style="max-width:720px;">
+  <div class="fade-in">
+    <h1 class="section-heading">Our Story</h1>
+    <!-- TODO: replace with your real story — where you source from, who makes the pieces, why you started this business -->
+    <p style="margin-top:16px; font-size:14px; line-height:1.7; color:rgba(43,38,34,0.75);">
+      Write a short, honest paragraph here about how this business started, who your artisans are, and what makes your pieces different from mass-produced clothing.
+    </p>
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div>
+      <h3 class="heading">Your Brand Name</h3>
+      <p style="margin-top:12px; max-width:280px;">Handwoven sarees, women's clothing, and handcrafted pieces — made by artisans, chosen with care.</p>
+    </div>
+    <div>
+      <h4 class="heading">Contact</h4>
+      <ul>
+        <li>Phone: +91 12345 67890</li>
+        <li>Email: hello@yourbrand.com</li>
+        <li>WhatsApp: +91 12345 67890</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="heading">Policies</h4>
+      <ul>
+        <li>5-Day Easy Exchange &amp; Refund</li>
+        <li>Delivery in 7 Days across India</li>
+        <li><a href="contact.html">Get in touch</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© <span id="year"></span> Your Brand Name. All rights reserved.</div>
+</footer>
+
+<script src="script.js"></script>
+<script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
