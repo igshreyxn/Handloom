@@ -2,45 +2,45 @@
 const PRODUCTS = [
   {
     id: "1",
-    name: "Handwoven Banarasi Silk Saree",
+    name: "Handwoven Silk Saree",
     price: 4500,
     category: "sarees",
-    image: "https://images.unsplash.com/photo-1610030181087-540967a0aa46?q=80&w=800"
+    image: "https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=800"
   },
   {
     id: "2",
-    name: "Block-Printed Cotton Saree",
+    name: "Printed Silk Saree",
     price: 1800,
     category: "sarees",
-    image: "https://images.unsplash.com/photo-1610030181261-8a7e6d5a7e6b?q=80&w=800"
+    image: "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=800"
   },
   {
     id: "3",
-    name: "Embroidered Kurta Set",
+    name: "Ethnic Wear Ensemble",
     price: 2200,
     category: "womens-clothing",
-    image: "https://images.unsplash.com/photo-1594736797933-d0f06ba2c064?q=80&w=800"
+    image: "https://images.unsplash.com/photo-1611574557783-9a50bb34e9f5?q=80&w=800"
   },
   {
     id: "4",
-    name: "Handcrafted Brass Diya Set",
+    name: "Hand-Painted Terracotta Horses",
     price: 950,
     category: "handicrafts",
-    image: "https://images.unsplash.com/photo-1604423043492-01ce8f61b2ca?q=80&w=800"
+    image: "https://images.unsplash.com/photo-1674530187072-f788b7282f17?q=80&w=800"
   },
   {
     id: "5",
-    name: "Hand-Painted Terracotta Vase",
+    name: "Terracotta Pottery",
     price: 1200,
     category: "handicrafts",
-    image: "https://images.unsplash.com/photo-1604423043492-01ce8f61b2ca?q=80&w=800"
+    image: "https://images.unsplash.com/photo-1524497440-4da55062cb4a?q=80&w=800"
   },
   {
     id: "6",
-    name: "Gifting Box: Saree + Diya Set",
+    name: "Gifting Box: Saree + Handicraft",
     price: 5200,
     category: "gifting",
-    image: "https://images.unsplash.com/photo-1610030181261-8a7e6d5a7e6b?q=80&w=800"
+    image: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?q=80&w=800"
   }
 ];
 
