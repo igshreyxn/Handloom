@@ -7,25 +7,39 @@ no build step. Upload these exactly the way you uploaded Notun Bazaar's files.
 - `index.html` — homepage (hero, categories, bestsellers, craftsmanship story, gifting, reviews)
 - `sarees.html`, `womens-clothing.html`, `handicrafts.html`, `gifting.html` — category pages
 - `about.html`, `contact.html`, `cart.html`
-- `admin.html` + `admin.js` — password-protected page to add/edit/delete products with image upload
+- `admin.html` + `admin.js` — password-protected page to manage Products, Orders, and Messages
 - `firebase-init.js` — shared Firebase setup (your project's config)
 - `firebase-sync.js` — streams live product data from Firestore into the public pages
+- `orders.js` — saves checkout orders from the cart page to Firestore
+- `messages.js` — saves contact form submissions to Firestore
 - `styles.css` — all colors, type, layout, animations
-- `script.js` — cart (saved in the browser via localStorage), fallback sample products, scroll animations
+- `script.js` — cart (saved in the browser via localStorage), checkout form, contact form, fallback sample products, scroll animations
 - `FIREBASE_RULES.md` — security rules to paste into Firebase Console once admin is confirmed working
 
 ## How the admin page works
-1. Go to `yoursite.vercel.app/admin.html` and log in with the email/password
-   you created in Firebase Authentication.
-2. Add a product: name, price, category, and an image file. It uploads the
-   image to Firebase Storage and saves the product to Firestore.
-3. Your live site (homepage + category pages) picks up the new product
-   automatically within a second or two — no redeploy needed, since it's
-   reading live from Firestore.
-4. Edit or delete any product from the same table.
+Go to `yoursite.vercel.app/admin.html` and log in with the email/password you
+created in Firebase Authentication. Three tabs:
+
+**Products** — add/edit/delete products. A photo is optional: products
+without one show a plain "No Image" placeholder until you add one later.
+There's also an "Add Starter Products" button that loads the 6 sample
+products already visible on your site into the real database, so you can
+edit or remove them properly instead of leaving them as hardcoded fallback
+data.
+
+**Orders** — every order placed through the cart's checkout form (customer
+name, phone, address, and their cart contents) appears here automatically,
+newest first. Change the status dropdown (New / Confirmed / Delivered) to
+track progress — there's no payment gateway yet, so this is a "we'll
+contact you to confirm" flow, not online payment.
+
+**Messages** — every contact form submission appears here, newest first.
+
+Changes to products reflect on your live site automatically within a
+second or two — no redeploy needed.
 
 **Important:** `admin.html` is a real page anyone could technically navigate
-to, but they can't do anything without your login — the "Add/Edit/Delete"
+to, but they can't do anything without your login — the Add/Edit/Delete
 actions are blocked by Firebase until you've applied the rules in
 `FIREBASE_RULES.md`. Do that as soon as the admin page is confirmed working.
 

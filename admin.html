@@ -7,11 +7,11 @@
 <meta name="robots" content="noindex, nofollow" />
 <link rel="stylesheet" href="styles.css" />
 <style>
-  .admin-wrap { max-width: 880px; margin: 0 auto; padding: 48px 20px 100px; }
-  .admin-header { display:flex; align-items:center; justify-content:space-between; margin-bottom: 32px; }
+  .admin-wrap { max-width: 920px; margin: 0 auto; padding: 48px 20px 100px; }
+  .admin-header { display:flex; align-items:center; justify-content:space-between; margin-bottom: 24px; flex-wrap: wrap; gap: 12px; }
   .login-box { max-width: 360px; margin: 100px auto; padding: 32px; border: 1px solid rgba(43,38,34,0.1); border-radius: 12px; }
-  .admin-table { width: 100%; border-collapse: collapse; margin-top: 24px; }
-  .admin-table th, .admin-table td { text-align: left; padding: 10px 8px; border-bottom: 1px solid rgba(43,38,34,0.1); font-size: 14px; vertical-align: middle; }
+  .admin-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  .admin-table th, .admin-table td { text-align: left; padding: 10px 8px; border-bottom: 1px solid rgba(43,38,34,0.1); font-size: 14px; vertical-align: top; }
   .admin-thumb { width: 56px; height: 68px; object-fit: cover; border-radius: 6px; background: rgba(43,38,34,0.05); }
   .admin-form { border: 1px solid rgba(43,38,34,0.1); border-radius: 12px; padding: 24px; margin-top: 12px; }
   .admin-form h2 { font-size: 20px; margin-bottom: 16px; }
@@ -23,6 +23,16 @@
   .status-msg.success { color: var(--maroon); }
   select.form-field { background: #fff; }
   .hidden { display: none !important; }
+
+  .admin-tabs { display: flex; gap: 6px; border-bottom: 1px solid rgba(43,38,34,0.1); margin-bottom: 24px; }
+  .admin-tab { padding: 10px 16px; font-size: 14px; background: none; border: none; cursor: pointer; color: rgba(43,38,34,0.55); border-bottom: 2px solid transparent; margin-bottom: -1px; }
+  .admin-tab.active { color: var(--maroon); border-bottom-color: var(--maroon); font-weight: 500; }
+
+  .order-badge { display:inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; text-transform: capitalize; }
+  .order-badge.new { background: #fdecea; color: #b3261e; }
+  .order-badge.confirmed { background: #fff4e0; color: #a86b00; }
+  .order-badge.delivered { background: #e7f4e9; color: #2e7d32; }
+  .order-items-list { margin: 0; padding-left: 16px; font-size: 12px; color: rgba(43,38,34,0.7); }
 </style>
 </head>
 <body>
@@ -45,43 +55,87 @@
     <button id="logout-btn" class="btn btn-secondary small-btn">Log Out</button>
   </div>
 
-  <div class="admin-form">
-    <h2 id="form-title">Add a Product</h2>
-    <form id="product-form">
-      <input type="hidden" id="editing-id" value="" />
-      <div class="form-row">
-        <input type="text" id="product-name" class="form-field" placeholder="Product name" required />
-        <input type="number" id="product-price" class="form-field" placeholder="Price (₹)" min="1" required />
-      </div>
-      <div class="form-row">
-        <select id="product-category" class="form-field" required>
-          <option value="" disabled selected>Category</option>
-          <option value="sarees">Sarees</option>
-          <option value="womens-clothing">Women's Clothing</option>
-          <option value="handicrafts">Handicrafts</option>
-          <option value="gifting">Gifting</option>
-        </select>
-        <input type="file" id="product-image" class="form-field" accept="image/*" />
-      </div>
-      <p style="font-size:12px; color:rgba(43,38,34,0.55); margin:-4px 0 14px;">
-        Leave the image field empty when editing to keep the current photo.
-      </p>
-      <div style="display:flex; gap:10px;">
-        <button type="submit" class="btn btn-primary" id="submit-btn">Add Product</button>
-        <button type="button" class="btn btn-secondary hidden" id="cancel-edit-btn">Cancel Edit</button>
-      </div>
-      <p id="form-status" class="status-msg"></p>
-    </form>
+  <div class="admin-tabs">
+    <button class="admin-tab active" data-tab="products">Products</button>
+    <button class="admin-tab" data-tab="orders">Orders</button>
+    <button class="admin-tab" data-tab="messages">Messages</button>
   </div>
 
-  <table class="admin-table">
-    <thead>
-      <tr><th></th><th>Name</th><th>Price</th><th>Category</th><th></th></tr>
-    </thead>
-    <tbody id="products-table-body">
-      <tr><td colspan="5" style="padding:20px 8px; color:rgba(43,38,34,0.5);">Loading products…</td></tr>
-    </tbody>
-  </table>
+  <!-- ---------- Products panel ---------- -->
+  <div id="panel-products">
+    <div class="admin-form">
+      <h2 id="form-title">Add a Product</h2>
+      <form id="product-form">
+        <input type="hidden" id="editing-id" value="" />
+        <div class="form-row">
+          <input type="text" id="product-name" class="form-field" placeholder="Product name" required />
+          <input type="number" id="product-price" class="form-field" placeholder="Price (₹)" min="1" required />
+        </div>
+        <div class="form-row">
+          <select id="product-category" class="form-field" required>
+            <option value="" disabled selected>Category</option>
+            <option value="sarees">Sarees</option>
+            <option value="womens-clothing">Women's Clothing</option>
+            <option value="handicrafts">Handicrafts</option>
+            <option value="gifting">Gifting</option>
+          </select>
+          <input type="file" id="product-image" class="form-field" accept="image/*" />
+        </div>
+        <p style="font-size:12px; color:rgba(43,38,34,0.55); margin:-4px 0 14px;">
+          A photo is optional — products without one show a plain placeholder until you add one later.
+          When editing, leave the image field empty to keep the current photo.
+        </p>
+        <div style="display:flex; gap:10px;">
+          <button type="submit" class="btn btn-primary" id="submit-btn">Add Product</button>
+          <button type="button" class="btn btn-secondary hidden" id="cancel-edit-btn">Cancel Edit</button>
+        </div>
+        <p id="form-status" class="status-msg"></p>
+      </form>
+    </div>
+
+    <div style="margin-top:16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+      <p style="font-size:12px; color:rgba(43,38,34,0.5); margin:0;">
+        Don't see the sample products already showing on your site (Handwoven Silk Saree, etc.)? They're placeholder
+        fallback data, not real entries yet — add them here so you can edit or remove them properly.
+      </p>
+      <button id="seed-products-btn" class="btn btn-secondary small-btn" style="white-space:nowrap;">
+        Add Starter Products
+      </button>
+    </div>
+
+    <table class="admin-table">
+      <thead>
+        <tr><th></th><th>Name</th><th>Price</th><th>Category</th><th></th></tr>
+      </thead>
+      <tbody id="products-table-body">
+        <tr><td colspan="5" style="padding:20px 8px; color:rgba(43,38,34,0.5);">Loading products…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ---------- Orders panel ---------- -->
+  <div id="panel-orders" class="hidden">
+    <table class="admin-table">
+      <thead>
+        <tr><th>Placed</th><th>Customer</th><th>Items</th><th>Total</th><th>Status</th></tr>
+      </thead>
+      <tbody id="orders-table-body">
+        <tr><td colspan="5" style="padding:20px 8px; color:rgba(43,38,34,0.5);">Loading orders…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ---------- Messages panel ---------- -->
+  <div id="panel-messages" class="hidden">
+    <table class="admin-table">
+      <thead>
+        <tr><th>Received</th><th>From</th><th>Contact</th><th>Message</th><th></th></tr>
+      </thead>
+      <tbody id="messages-table-body">
+        <tr><td colspan="4" style="padding:20px 8px; color:rgba(43,38,34,0.5);">Loading messages…</td></tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <script type="module" src="admin.js"></script>

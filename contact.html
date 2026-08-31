@@ -62,7 +62,10 @@
     <textarea class="form-field" placeholder="Your message" rows="4" required></textarea>
     <button type="submit" class="btn btn-primary">Send Message</button>
     <p id="contact-success" style="display:none; margin-top:14px; font-size:14px; color:var(--maroon);">
-      Thanks — we'll get back to you soon. (Connect this form to an email service so this actually reaches your inbox.)
+      Thanks — we'll get back to you soon.
+    </p>
+    <p id="contact-error" style="display:none; margin-top:14px; font-size:14px; color:#b3261e;">
+      Something went wrong sending your message — please try WhatsApp or phone instead.
     </p>
   </form>
 </main>
@@ -94,6 +97,7 @@
 </footer>
 
 <script src="script.js"></script>
+<script type="module" src="messages.js"></script>
 <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>

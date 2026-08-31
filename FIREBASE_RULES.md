@@ -18,13 +18,22 @@ service cloud.firestore {
       allow read: if true;
       allow write: if request.auth != null;
     }
+    match /orders/{orderId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
+    match /messages/{messageId} {
+      allow create: if true;
+      allow read, update, delete: if request.auth != null;
+    }
   }
 }
 ```
 
-This means: anyone can view products (needed for your public site to work),
-but only someone logged in (you, via the admin page) can add, edit, or
-delete a product.
+This means:
+- **Products** — anyone can view them (needed for your public site), only you can add/edit/delete.
+- **Orders** — any visitor can place one (needed for checkout to work), but only you can view, update, or delete them — customers can't see each other's orders.
+- **Messages** — any visitor can submit one (needed for the contact form), but only you can read them.
 
 ## When to do this
 Do this AFTER you've confirmed the admin page itself works (logging in,

@@ -1,3 +1,10 @@
+// ---------- Shown for products added without a photo ----------
+const PLACEHOLDER_IMAGE =
+  "data:image/svg+xml;utf8," +
+  encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="500"><rect width="100%" height="100%" fill="#f0ece4"/><text x="50%" y="50%" font-family="sans-serif" font-size="24" fill="#a89f92" text-anchor="middle" dy=".3em">No Image</text></svg>`
+  );
+
 // ---------- Sample/fallback products, shown until Firestore data loads ----------
 let PRODUCTS = [
   {
@@ -115,7 +122,7 @@ function renderProductGrid(containerId, category) {
       (p, i) => `
     <div class="product-card fade-in" style="transition-delay:${i * 80}ms">
       <div class="product-card-image">
-        <img src="${p.image}" alt="${p.name}" loading="lazy" />
+        <img src="${p.image || PLACEHOLDER_IMAGE}" alt="${p.name}" loading="lazy" />
       </div>
       <div class="product-card-body">
         <div class="product-card-name">${p.name}</div>
@@ -189,9 +196,70 @@ function renderCartPage() {
       <span class="heading">Total</span>
       <span class="heading" style="color:var(--maroon);">${formatINR(total)}</span>
     </div>
-    <button class="btn btn-primary" style="width:100%; margin-top:24px;" onclick="alert('TODO: connect Razorpay/Stripe checkout here')">
-      Proceed to Checkout
-    </button>`;
+    <form id="checkout-form" style="margin-top:28px;">
+      <h2 class="heading" style="font-size:20px; margin-bottom:14px;">Delivery Details</h2>
+      <input type="text" id="checkout-name" class="form-field" placeholder="Your name" required />
+      <input type="tel" id="checkout-phone" class="form-field" placeholder="Phone number" required />
+      <textarea id="checkout-address" class="form-field" placeholder="Delivery address" rows="3" required></textarea>
+      <button type="submit" class="btn btn-primary" style="width:100%;" id="checkout-submit-btn">Place Order</button>
+      <p id="checkout-status" class="status-msg" style="margin-top:10px; font-size:13px;"></p>
+      <p style="margin-top:10px; font-size:12px; color:rgba(43,38,34,0.55);">
+        We'll contact you on WhatsApp or phone to confirm your order and delivery — no online payment yet.
+      </p>
+    </form>
+  `;
+
+  attachCheckoutFormHandler();
+}
+
+function attachCheckoutFormHandler() {
+  const form = document.getElementById("checkout-form");
+  if (!form) return;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById("checkout-submit-btn");
+    const status = document.getElementById("checkout-status");
+    const name = document.getElementById("checkout-name").value.trim();
+    const phone = document.getElementById("checkout-phone").value.trim();
+    const address = document.getElementById("checkout-address").value.trim();
+    const cart = getCart();
+    const total = cart.reduce((sum, i) => sum + i.qty * i.price, 0);
+
+    btn.disabled = true;
+    status.className = "status-msg";
+    status.style.color = "";
+    status.textContent = "Placing your order…";
+
+    try {
+      if (typeof window.submitOrder !== "function") {
+        throw new Error("Order system isn't ready yet — please try again in a moment.");
+      }
+      await window.submitOrder({
+        items: cart.map((i) => ({ id: i.id, name: i.name, price: i.price, qty: i.qty })),
+        total,
+        customerName: name,
+        phone,
+        address
+      });
+
+      localStorage.removeItem(CART_KEY);
+      updateCartBadge();
+
+      document.getElementById("cart-page-content").innerHTML = `
+        <div style="text-align:center; padding: 80px 0;">
+          <h1 class="heading" style="font-size:30px;">Thank you!</h1>
+          <p style="margin-top:12px; font-size:14px; color:rgba(43,38,34,0.7);">
+            Your order has been placed. We'll reach out on WhatsApp or phone shortly to confirm.
+          </p>
+          <a href="index.html" class="btn btn-primary" style="margin-top:24px;">Continue Shopping</a>
+        </div>`;
+    } catch (err) {
+      status.style.color = "#b3261e";
+      status.textContent = "Something went wrong — please try again, or message us on WhatsApp.";
+      btn.disabled = false;
+    }
+  });
 }
 
 // ---------- Header: shrink on scroll + mobile menu ----------
@@ -250,15 +318,40 @@ function setupStorySection() {
   observer.observe(section);
 }
 
-// ---------- Contact form (front-end only for now) ----------
+// ---------- Contact form ----------
 function setupContactForm() {
   const form = document.getElementById("contact-form");
   if (!form) return;
-  form.addEventListener("submit", (e) => {
+
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    // TODO: connect to an email service (Formspree, etc.) so this reaches your inbox
-    document.getElementById("contact-success").style.display = "block";
-    form.reset();
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const successMsg = document.getElementById("contact-success");
+    const errorMsg = document.getElementById("contact-error");
+    const inputs = form.querySelectorAll("input, textarea");
+    const [nameField, phoneField, emailField, messageField] = inputs;
+
+    if (submitBtn) submitBtn.disabled = true;
+    if (errorMsg) errorMsg.style.display = "none";
+    if (successMsg) successMsg.style.display = "none";
+
+    try {
+      if (typeof window.submitContactMessage !== "function") {
+        throw new Error("Message system isn't ready yet.");
+      }
+      await window.submitContactMessage({
+        name: nameField.value.trim(),
+        phone: phoneField.value.trim(),
+        email: emailField.value.trim(),
+        message: messageField.value.trim()
+      });
+      if (successMsg) successMsg.style.display = "block";
+      form.reset();
+    } catch (err) {
+      if (errorMsg) errorMsg.style.display = "block";
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
   });
 }
 
